@@ -1,7 +1,16 @@
 package com.zpoif.soprojekt.form;
 
+
+import javax.validation.constraints.NotNull;
+
 public class FormTags {
+
+    @NotNull
+    @DateConstraint
     private String fromDate;
+
+    @NotNull
+    @DateConstraint
     private String toDate;
 
     public String getFromDate() {

@@ -10,7 +10,7 @@ import tech.tablesaw.api.StringColumn;
 import tech.tablesaw.api.Table;
 
 
-public class LanguageTagCounter {
+public class LanguageTagCounterAlpha {
     /*private final  String[] languages = {"java", "c", "c++", "python", "c#", "javascript", ".net", "r", "php", "matlab",
             "swift", "objective-c", "assembly", "perl", "ruby", "delphi", "go", "mit-scratch", "sql", "vb.net"};
     private int[] count = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};*/
@@ -18,10 +18,11 @@ public class LanguageTagCounter {
     private final  String[] languages = {"java", "c", "c++", "python", "c#", "javascript"};
     private int[] count = {0,0,0,0,0,0};
 
+
     public Table receiveData(TimePeriod timePeriod){
         Table data = Table.create("LanguageTagData");
 
-        StackExchangeApiQueryFactory queryFactory = StackExchangeApiQueryFactory
+        final StackExchangeApiQueryFactory queryFactory = StackExchangeApiQueryFactory
                 .newInstance("4ccOeYINdrpbkpWOgBTZSw((",
                         StackExchangeSite.STACK_OVERFLOW);
         String filter = "default";
@@ -31,7 +32,6 @@ public class LanguageTagCounter {
         for(int i=0; i < languages.length; i++) {
             String tag = languages[i];
             System.out.println(tag);
-
             int j=1;
             while(true) {
                 Paging paging = new Paging(j, 100);

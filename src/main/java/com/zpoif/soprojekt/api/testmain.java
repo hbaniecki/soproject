@@ -1,24 +1,90 @@
 package com.zpoif.soprojekt.api;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.code.stackexchange.client.query.StackExchangeApiQueryFactory;
-import com.google.code.stackexchange.common.PagedList;
-import com.google.code.stackexchange.schema.*;
-import tech.tablesaw.api.Table;
-import tech.tablesaw.plotly.Plot;
-import tech.tablesaw.plotly.api.PiePlot;
 
-import java.util.Date;
 
+import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+import org.springframework.http.MediaType;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.Map;
+import java.util.zip.GZIPInputStream;
 
 public class testmain {
-    public static void main(String args[]) {
 
-        //LanguageTagCounter test
-        /*TimePeriod timePeriod = new TimePeriod(new Date(1514761200000L), new Date(1543618800000L));
-        Table testData = new LanguageTagCounter().receiveData(timePeriod);
 
-        System.out.print(testData);
+    public static void main(String args[]) throws IOException {
+        // to działa bo api zwraca gzip
+        /*URL url = new URL("https://api.stackexchange.com/2.2/info?site=stackoverflow");
+        final HttpURLConnection request = (HttpURLConnection) url.openConnection();
+        request.connect();
+        final JsonParser jp = new JsonParser();
+        final JsonElement root = jp.parse(new InputStreamReader(new GZIPInputStream((InputStream) request.getContent())));
+        final JsonObject rootobj = root.getAsJsonObject();
+
+        JsonObject json = rootobj.getAsJsonArray("items").get(0).getAsJsonObject();
+
+        Gson gson = new Gson();
+        Type stringStringMap = new TypeToken<Map<String, String>>(){}.getType();
+        Map<String,String> map = gson.fromJson(json, stringStringMap);
+        System.out.println(map.get("total_users"));*/
+
+        // to nie działa bo api zwraca gzip
+        //https://httpbin.org/get?color=red&shape=oval
+        //https://api.stackexchange.com/2.2/info?site=stackoverflow
+        /*URL url = new URL("https://api.stackexchange.com/2.2/info?site=stackoverflow");
+        InputStreamReader reader = new InputStreamReader(url.openStream(), "UTF-8"); //CP857 UTF-8
+        int data = reader.read();
+        while(data != -1){
+            System.out.print((char) data);
+            data = reader.read();
+        }
+
+        reader.close();
+        MyDto dto = new Gson().fromJson(reader, MyDto.class);
+*/
+
+        /*//LanguageTagCounter time test
+        StopWatch sw = new org.springframework.util.StopWatch();
+        TimePeriod timePeriod = new TimePeriod(new Date(1514764800000L), new Date(1517356800000L));
+
+        sw.start("jedenWątek");
+            Table testData1 = new LanguageTagCounterAlpha().receiveData(timePeriod);
+        sw.stop();
+        sw.start("wieleWatkow");
+            Table testData2 = new LanguageTagCounter2(timePeriod).receiveData2();
+        sw.stop();
+        System.out.println(testData1);
+        System.out.println(testData2);
+        System.out.println("Table describing all tasks performed :\n"+sw.prettyPrint());*/
+
+
+        /*final StackExchangeApiClientFactory factory = StackExchangeApiClientFactory
+                .newInstance("4ccOeYINdrpbkpWOgBTZSw((",
+                        StackExchangeSite.STACK_OVERFLOW);
+        final AsyncStackExchangeApiClient client = factory
+                .createAsyncStackExchangeApiClient();
+        Future<List<Question>> questionsFuture = client.getQuestions(timePeriod);
+        List<Question> questions = null;
+        try {
+            questions = questionsFuture.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        System.out.println(questions.size());*/
+        /*
+
+
         //System.out.print(testData.printHtml());
 
         Plot.show(

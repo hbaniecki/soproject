@@ -14,6 +14,7 @@ import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Objects;
 import java.util.zip.GZIPInputStream;
@@ -60,14 +61,19 @@ public class SiteStatsGetter {
         Gson gson = new Gson();
         Type stringStringMap = new TypeToken<Map<String, String>>(){}.getType();
         Map<String,String> dataMap = gson.fromJson(json, stringStringMap);
+        dataMap.remove("api_revision");
 
-        String[] names = (String[]) dataMap.keySet().toArray();
-        Double[] values = (Double[]) dataMap.values().toArray();
+        String[] names = new String[12];
+        String[] values = new String[12];
+        dataMap.keySet().toArray(names);
+        dataMap.values().toArray(values);
 
 
-        /*Table data = Table.create("SiteStatsData");
-        data.addColumns(StringColumn.create("jezyk",names), DoubleColumn.create("liczba",values));*/
-        return TableMaker.make("język", names, "liczba", values);
+        /*Double[] doubleValues = Arrays.stream(values)
+                .map(Double::valueOf)
+                .toArray(Double[]::new);*/
+
+        return TableMaker.makeString("Stats", names, "Count", values);
     }
 
 }

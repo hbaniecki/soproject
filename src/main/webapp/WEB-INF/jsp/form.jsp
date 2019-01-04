@@ -25,5 +25,6 @@
                 </table>
             </form:form>
         </div>
+        <% System.out.println("/form dziala");%>
     </body>
 </html>

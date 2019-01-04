@@ -6,6 +6,7 @@ import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import org.springframework.http.MediaType;
+import tech.tablesaw.api.Table;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,6 +16,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.zip.GZIPInputStream;
 
@@ -22,6 +24,10 @@ public class testmain {
 
 
     public static void main(String args[]) throws IOException {
+
+        /*Table testData = SiteStatsGetter.receiveData();
+        System.out.println(testData.toString());*/
+
         // to działa bo api zwraca gzip
         /*URL url = new URL("https://api.stackexchange.com/2.2/info?site=stackoverflow");
         final HttpURLConnection request = (HttpURLConnection) url.openConnection();
@@ -35,7 +41,13 @@ public class testmain {
         Gson gson = new Gson();
         Type stringStringMap = new TypeToken<Map<String, String>>(){}.getType();
         Map<String,String> map = gson.fromJson(json, stringStringMap);
-        System.out.println(map.get("total_users"));*/
+        map.remove("api_revision");
+        String[] a = new String[12];
+        map.values().toArray(a);
+
+        Double[] doubleValues = Arrays.stream(a)
+                .map(Double::valueOf)
+                .toArray(Double[]::new);*/
 
         // to nie działa bo api zwraca gzip
         //https://httpbin.org/get?color=red&shape=oval

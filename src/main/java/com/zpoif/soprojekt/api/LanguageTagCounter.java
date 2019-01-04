@@ -90,9 +90,8 @@ public class LanguageTagCounter{
             i++;
         }
 
-        /*Table data = Table.create("LanguageTagData").setName("Udział najpopularniejszych języków programowania w pytaniach na stronie");
-        data.addColumns(StringColumn.create("jezyk",languages), DoubleColumn.create("liczba",count));*/
+
         //double[] doubles = Arrays.stream(count).asDoubleStream().toArray();
-        return TableMaker.make("jezyk", languages, "liczba", count);
+        return TableMaker.makeInteger("jezyk", languages, "liczba", count);
     }
 }

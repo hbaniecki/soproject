@@ -1,29 +1,35 @@
 package com.zpoif.soprojekt.api;
 
+import com.google.code.stackexchange.schema.TimePeriod;
 
-
-import com.google.gson.*;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
-import org.springframework.http.MediaType;
-import tech.tablesaw.api.Table;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.lang.reflect.Type;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.zip.GZIPInputStream;
+import java.util.Date;
 
 public class testmain {
 
 
-    public static void main(String args[]) throws IOException {
+    public static void main(String args[]) {
+        //wykres 2
+        /*Date date1 = new Date(1543622400000L); //1543363200000L
+        Date date2 = new Date(1546214400000L); //1543622400000L
+
+        TimePeriod timePeriod = new TimePeriod(date1, date2);
+        StopWatch sw = new org.springframework.util.StopWatch();
+        sw.start("test");
+        Table testData = new QuestionCounter(timePeriod).receiveData();
+        sw.stop();
+        System.out.println("Twój czas działania QuestionCounter wyniósł: " + sw.getLastTaskTimeMillis()/1000 + "sekund");
+
+        Plot.show(TimeSeriesPlot.create("Liczba nowych pytan na stronie w poszczegolnych dniach", testData,"data", "liczba"));*/
+
+        // obliczanie róznicy pomiędzy dwoma dniami z timeperiod i zwracanie liczby dni
+        /*TimePeriod timePeriod = new TimePeriod(new Date(1546300800000L), new Date(1546300800000L));
+        Duration d =
+                Duration.between(                   // Calculate the span of time between two moments as a number of hours, minutes, and seconds.
+                        timePeriod.getStartDate().toInstant() ,    // Convert legacy class to modern class by calling new method added to the old class.
+                        timePeriod.getEndDate().toInstant()                 // Capture the current moment in UTC. About two and a half hours later in this example.
+                );
+        int n = (int) d.toDays();
+        System.out.println(n);*/
 
         /*Table testData = SiteStatsGetter.receiveData();
         System.out.println(testData.toString());*/

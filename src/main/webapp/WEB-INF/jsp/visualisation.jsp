@@ -9,7 +9,10 @@
     </head>
     <body>
         <div id="wykresTagi" align = "center">
-            <diva> ${message} </diva>
+            <diva> ${wykres1} </diva>
+        </div>
+        <div id="wykresPytania" align = "center">
+            <diva> ${wykres2} </diva>
         </div>
 
         <% System.out.println("/visualisation dziala");%>

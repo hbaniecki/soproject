@@ -45,7 +45,7 @@
         <img src="/img/stack-overflow.png" alt="logo" class="img">
 
         <div id="statystyki" align = "center">
-            <table id="t01">  ${message2} </table>
+            <table id="t01">  ${tabela} </table>
         </div>
         <div align = "center">
             <input type="button" class="button"  onclick="location.href='/form'" value="Get more stats">

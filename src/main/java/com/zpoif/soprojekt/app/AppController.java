@@ -3,6 +3,7 @@ package com.zpoif.soprojekt.app;
 import com.zpoif.soprojekt.form.FormTags;
 import com.zpoif.soprojekt.visualisation.VisualiseStats;
 import com.zpoif.soprojekt.visualisation.VisualiseTags;
+import com.zpoif.soprojekt.visualisation.VisualiseTimeline;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,17 +19,20 @@ import java.util.Map;
 @Controller
 public class AppController {
 
-    @Value("${visualisation.message}")
-    private String message;
+    @Value("${visualisation.wykres1}")
+    private String wykres1;
 
-    @Value("${home.message}")
-    private String message2;
+    @Value("${visualisation.wykres2}")
+    private String wykres2;
+
+    @Value("${home.tabela}")
+    private String tabela;
 
     @RequestMapping("/home")
     public String welcome(Map<String, Object> model) {
 
-        message2 = VisualiseStats.visualise();
-        model.put("message2", this.message2);
+        tabela = VisualiseStats.visualise();
+        model.put("tabela", this.tabela);
         return "/home";
     }
 
@@ -44,9 +48,13 @@ public class AppController {
             return "formError";
         }
 
-        message = VisualiseTags.visualise(formTags.getFromDate(),formTags.getToDate(), "wykresTagi");
+        System.out.println(formTags.getFromDate());
+        System.out.println(formTags.getToDate());
+        wykres1 = VisualiseTags.visualise(formTags.getFromDate(),formTags.getToDate(), "wykresTagi");
+        wykres2 = VisualiseTimeline.visualise(formTags.getFromDate(),formTags.getToDate(), "wykresPytania");
 
-        model.addAttribute("message", this.message);
+        model.addAttribute("wykres1", this.wykres1);
+        model.addAttribute("wykres2", this.wykres2);
 
         return "/visualisation";
     }

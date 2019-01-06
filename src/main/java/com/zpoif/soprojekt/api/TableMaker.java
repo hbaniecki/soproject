@@ -6,7 +6,7 @@ import tech.tablesaw.api.Table;
 
 class TableMaker {
     //funkcja tworząca tabele z dwóch kolumn
-    static Table makeInteger(String nazwA, String[] a, String nazwB, Integer[] b){
+    static Table makeInteger(String nazwA, String[] a, String nazwB, int[] b){
         Table temp = Table.create("nazwa");
         temp.addColumns(StringColumn.create(nazwA , a), DoubleColumn.create(nazwB , b));
 
